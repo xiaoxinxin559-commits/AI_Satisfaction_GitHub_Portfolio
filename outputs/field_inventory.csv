@@ -1,0 +1,27 @@
+field,title,role,reason,missing_pct,n_unique,flags
+session_id,会话键,metadata,仅去重与连接；不是预测特征,0.0,2400,
+user_id,登录标识,metadata,0 仅表示未登录；不可将所有 0 合为一人,0.0,970,
+anonymous_id,匿名演示标识,metadata,仅用于演示分组；全部为合成标识,79.51907131011609,241,
+survey_time,问卷时间,metadata,限定事件窗口；重复问卷保留最新提交,0.0,2396,
+period,演示时期,group,仅分组展示；不对应真实业务日期,0.0,4,
+entry_source,入口类型,group,用于分层检查；演示主模型不纳入,0.0,3,
+score,满意度评分,target,1–5 有序结果，不得进入特征白名单,0.33167495854063017,6,
+age_level,年龄组序位,control,控制项；按 0–3 等距近似仅用于演示,9.991708126036485,4,
+is_returning,是否老用户,control,问卷前已知的二元控制项,0.0,2,
+quick_result_count,快测结果展示,behavior,问卷前事件计数；训练集 P99 缩尾后 log1p,0.0,8,
+consult_result_count,问诊结果展示,behavior,问卷前事件计数；训练集 P99 缩尾后 log1p,0.0,5,
+followup_shown_count,追问提示展示,behavior,演示定义为展示事件数；非真实表头,0.0,10,
+followup_click_count,追问提示点击,behavior,问卷前计数；不预设越多越好,0.0,6,
+order_flag,是否下单,downstream,同期/下游结果；不进入满意度前因模型,0.0,2,
+return_next_day,次日回访字段,unusable,故意构造的常量，用于演示数据质量拦截,0.0,1,constant
+legacy_card_count,旧版卡片计数,versioned,演示 P3/P4 结构性缺失，不能补零后做跨期趋势,49.70978441127695,4,cross_period_break
+unused_empty,空导出列,unusable,故意构造的全空列，保留在字段盘点中,100.0,0,all_missing
+expert_score,独立评测评分,evaluation,仅演示样本有值；与满意度分开报告,94.94195688225538,6,
+pos_recommendation,正向标签·recommendation,gated_label,评分≥4 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+pos_clarity,正向标签·clarity,gated_label,评分≥4 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+pos_warmth,正向标签·warmth,gated_label,评分≥4 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+pos_professional,正向标签·professional,gated_label,评分≥4 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+neg_offtopic,负向标签·offtopic,gated_label,评分≤3 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+neg_inaccurate,负向标签·inaccurate,gated_label,评分≤3 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+neg_thin,负向标签·thin,gated_label,评分≤3 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk
+neg_recommendation,负向标签·recommendation,gated_label,评分≤3 后展示；仅作反馈描述，不作前因特征,0.0,2,target_leakage_risk

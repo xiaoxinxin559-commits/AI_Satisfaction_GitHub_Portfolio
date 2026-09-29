@@ -1,0 +1,64 @@
+{
+  "provenance": "Wholly synthetic demo; reconstructed code, not original execution.",
+  "quality": {
+    "raw_rows": 2412,
+    "unique_sessions_before_outcome_filter": 2400,
+    "duplicate_rows_removed": 12,
+    "invalid_outcome_rows_removed": 14,
+    "valid_sessions": 2386,
+    "anonymous_sessions_retained": 490,
+    "session_key_fallbacks": 0,
+    "unit": "session/questionnaire, not unique persons"
+  },
+  "gating": {
+    "positive_tags_at_low_score": 0,
+    "negative_tags_at_high_score": 0,
+    "mixed_branch_tags": 0,
+    "no_tag_selected": 347,
+    "warning": "Rules must be checked against the questionnaire; zero violations do not prove causality or independence."
+  },
+  "models": {
+    "provenance": "synthetic reconstruction; not historical project results",
+    "seed": 42,
+    "train_sessions": 1803,
+    "test_sessions": 583,
+    "participant_overlap": 0,
+    "baseline": {
+      "train_r2": 0.05527342485877429,
+      "test_r2": 0.04968774407004417,
+      "test_mae": 0.7796841313980986
+    },
+    "leakage_demonstration": {
+      "train_r2": 0.4727635600217346,
+      "test_r2": 0.43381378461181286,
+      "test_mae": 0.6051167803248066,
+      "valid_for_prediction": false
+    },
+    "ordinal_sensitivity": {
+      "converged": true,
+      "test_mae_expected_score": 0.7825086399609952,
+      "note": "Model-based exploratory fit; not an ordered SEM or a reproduction of the original model."
+    },
+    "scaled_design_condition_number": 2.428103436560162,
+    "preprocessing": {
+      "fit_on": "training only",
+      "p99_caps": {
+        "quick_result_count": 5.0,
+        "consult_result_count": 3.0,
+        "followup_shown_count": 6.0,
+        "followup_click_count": 3.0
+      }
+    },
+    "interpretation": "OLS approximates the ordinal score as equally spaced; coefficients are conditional associations, not causal lifts."
+  },
+  "sql_count_check": "passed",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "statsmodels": "0.14.6",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  }
+}

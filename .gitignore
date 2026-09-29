@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+.env.*
+data/raw/
+data/private/
+*.sqlite
+*.db
+*.log
+.DS_Store

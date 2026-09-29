@@ -1,0 +1,8 @@
+Title: AI 协作满意度分析 · 作品展示
+Initial sessions: 2,386
+Filtered sessions: 263
+当前 8 / 26 个合成字段 · 搜索、角色与排序可组合使用
+CSV export: synthetic_field_inventory.csv
+Desktop overflow: False
+Mobile overflow: False
+JavaScript errors: []

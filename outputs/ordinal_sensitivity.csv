@@ -1,0 +1,8 @@
+feature,ordinal_log_odds_per_sd,same_direction_as_ols
+quick_result_count,0.3506995775512815,True
+consult_result_count,0.08481645591628939,True
+followup_shown_count,0.21176061589767864,True
+followup_click_count,-0.15690869914188815,True
+is_returning,0.06701640246236445,True
+age_level,0.1419693996594621,True
+age_unknown,0.07262305263956319,True

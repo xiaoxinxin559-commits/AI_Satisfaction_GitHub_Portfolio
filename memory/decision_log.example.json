@@ -1,0 +1,9 @@
+{
+  "provenance": "New demonstration log; reconstructed decision patterns, not chat transcripts",
+  "decisions": [
+    {"task": "字段盘点", "decision": "所有源字段都有去向，未确认项不入模", "evidence": "字段清单包含标识、类别、空列和口径变更列"},
+    {"task": "门控标签审计", "decision": "评分后展示的标签不作预测前因", "evidence": "问卷分支规则与标签交叉检查"},
+    {"task": "系数复核", "decision": "方向反转先查口径、时序和共线性", "evidence": "相关、条件系数与模型诊断分开报告"},
+    {"task": "交付", "decision": "发布合成数据演示与适用边界", "evidence": "源码、测试、图表和版本说明同包保存"}
+  ]
+}

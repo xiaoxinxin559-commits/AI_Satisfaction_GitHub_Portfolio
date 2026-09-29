@@ -1,0 +1,14 @@
+# Newly structured public example. This is not a copy of a private memory store.
+profile_type: confirmed_work_preferences
+not_a_personality_assessment: true
+preferences:
+  - confirm_metric_definitions_before_modeling
+  - keep_original_column_names_in_authorized_source_analysis
+  - show_code_outputs_interpretation_and_next_step_together
+  - trace_each_reported_number_to_its_source
+  - require_human_approval_for_model_selection_and_external_publication
+  - preserve_prior_versions_and_log_decisions
+retention:
+  raw_health_text: never_store_in_public_repo
+  credentials: never_store
+  inferred_preferences: require_user_confirmation
