@@ -1,0 +1,58 @@
+name: Unpack public portfolio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and extract the reviewed public package
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib
+          import json
+          from pathlib import Path, PurePosixPath
+          import zipfile
+
+          archive = Path("AI_Satisfaction_GitHub_Portfolio.zip")
+          expected = "5c5b50d1a150c87e18cbb211fcc7cafaebbbe98ca4ac767bfdd54bea82eafb4e"
+          assert hashlib.sha256(archive.read_bytes()).hexdigest() == expected, "Unexpected archive version"
+          prefix = "ai-satisfaction-analysis-portfolio/"
+          with zipfile.ZipFile(archive) as bundle:
+              files = {}
+              for entry in bundle.infolist():
+                  assert entry.filename.startswith(prefix), "Unexpected archive root"
+                  if entry.is_dir():
+                      continue
+                  relative = PurePosixPath(entry.filename[len(prefix):])
+                  assert not relative.is_absolute() and ".." not in relative.parts
+                  assert relative.parts[0] not in (".git", ".github")
+                  files[str(relative)] = bundle.read(entry)
+              manifest = json.loads(files["MANIFEST.json"])
+              assert set(files) == {row["path"] for row in manifest} | {"MANIFEST.json"}
+              for row in manifest:
+                  assert hashlib.sha256(files[row["path"]]).hexdigest() == row["sha256"]
+              for name, content in files.items():
+                  target = Path(name)
+                  if target.exists():
+                      assert target.read_bytes() == content, f"Refusing to overwrite changed file: {name}"
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(content)
+          print(f"Verified and extracted {len(files)} public project files")
+          PYCODE
+      - name: Commit project files without replacing history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .gitignore CHANGELOG.md DATA_PROVENANCE.md MANIFEST.json README.md requirements*.txt assets data docs memory notebooks outputs prompts skills sql src tests
+          if git diff --cached --quiet; then
+            echo "Project files are already up to date."
+          else
+            git commit -m "Publish complete public Agent portfolio"
+            git push origin HEAD:main
+          fi
